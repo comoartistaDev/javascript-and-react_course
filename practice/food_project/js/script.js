@@ -116,13 +116,13 @@ window.addEventListener('DOMContentLoaded', () => {
   //************************ 
   // Modal window
   //************************* 
-  const  modalTrigger = document.querySelectorAll('[data-modal]'),
+  const modalTrigger = document.querySelectorAll('[data-modal]'),
         modalCloseBtn = document.querySelector('[data-close]'),
         modal = document.querySelector('.modal');
 
   function openModal() {
-    modal.classList.add('show');
     modal.classList.remove('hide');
+    modal.classList.add('show');
     // modal.classList.toggle('hide'); //use toggle, add class hide in HTML;
     // modal.style.display = 'block'; //use inline style;
     document.body.style.overflow = 'hidden'; //stop scroll 
@@ -139,8 +139,9 @@ window.addEventListener('DOMContentLoaded', () => {
     // modal.style.display = 'none';
     // modal.classList.toggle('hide');
     document.body.style.overflow = '';
+
     clearInterval(modalTimerId); //if user click on modal window setTimout will not start
-  }
+  } 
 
   modalCloseBtn.addEventListener('click', closeModal);
       
@@ -156,19 +157,16 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  const modalTimerId = setTimeout(openModal, 10000); //open model window after 3000ms
+  const modalTimerId = setTimeout(openModal, 3000); //open model window after 3s
 
-  function showModalByScroll () {
+  function showModalByScroll() {
     if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight - 1) {
       openModal();
       window.removeEventListener('scroll', showModalByScroll);
     };
   }
-
+  
   window.addEventListener('scroll', showModalByScroll);
-
-
-
 
 
 
