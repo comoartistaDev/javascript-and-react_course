@@ -172,12 +172,13 @@ window.addEventListener('DOMContentLoaded', () => {
   // Classes for Cards
   //************************* 
   class MenuCard { 
-    constructor (src, alt, title, descr, price, parentSelector) {
+    constructor (src, alt, title, descr, price, parentSelector, ...classes) { //...classes = rest operator
       this.src = src;
       this.alt = alt;
       this.title = title;
       this.descr = descr;
       this.price = price;
+      this.classes = classes;
       this.parent = document.querySelector(parentSelector);
       this.transfer = 27;
       this.changeToUAH(); //call function
@@ -189,8 +190,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
     render() {
       const element = document.createElement('div');
+      if (this.classes.length === 0) {
+        this.element = 'menu__item';
+        element.classList.add(this.element);
+      } else {
+        this.classes.forEach(className => element.classList.add(className));
+      }
+
       element.innerHTML =  `
-        <div class="menu__item">
         <img src=${this.src} alt=${this.alt}>
         <h3 class="menu__item-subtitle">${this.title}</h3>
         <div class="menu__item-descr">${this.descr}</div>
@@ -199,7 +206,6 @@ window.addEventListener('DOMContentLoaded', () => {
             <div class="menu__item-cost">Цена:</div>
             <div class="menu__item-total"><span>${this.price}</span> грн/день</div>
         </div>
-      </div>
       `; 
       this.parent.append(element);
     }
@@ -220,7 +226,8 @@ window.addEventListener('DOMContentLoaded', () => {
     'Меню “Премиум”',
     'В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!',
     14,
-    '.menu .container'
+    '.menu .container',
+    'menu__item'
   ).render();
 
   new MenuCard(
@@ -229,15 +236,120 @@ window.addEventListener('DOMContentLoaded', () => {
     'Меню "Постное"',
     'Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.',
     15,
-    '.menu .container'
+    '.menu .container',
+    'menu__item'
   ).render();
 
-  
+//************************ 
+// Forms
+//************************* 
+//Use formData
+// const forms = document.querySelectorAll('form');
+
+// const message = { //add message option
+//   loading: 'Progress',
+//   success: 'Thank you! We will be in touch soon',
+//   failure: 'Something went wrong...'
+// }
+
+// forms.forEach(item => { //add script for all form our form
+//   postData(item); //it's function with 2 our form
+// });
+
+// function postData(form) {
+//   form.addEventListener('submit', (e) => { 
+//       e.preventDefault();
+
+//       //this part for add message on the Page
+//       const statusMessage = document.createElement('div'); //create div
+//       statusMessage.classList.add('status'); //add class status  to div
+//       statusMessage.textContent = message.loading; //put value
+//       form.append(statusMessage); //add div with class status to form
+
+//       const request = new XMLHttpRequest(); //create object XMLHttpRequest
+//       request.open('POST', 'server.php'); //сollect settings that will help make a request; 'server.php' - the path we refer to
+
+//       //!!for XMLHttpRequest + formData you don't need to write the title, otherwise it's an error
+//       //request.setRequestHeader('Content-type', 'multipart/form-data'); 
+      
+//       const formData = new FormData(form); //in input you must always specify the attribute: name = "name (or another name)";
+
+//       request.send(formData); //sending a request formData
+
+//       request.addEventListener('load', () => { //request tracking
+//         if (request.status === 200) { //if success
+//           console.log(request.response);
+//           statusMessage.textContent = message.success; //show message about success
+
+//           form.reset();
+//           setTimeout(() => {
+//             statusMessage.remove(); //cleaning form
+//           }, 2000);
+//         } else {
+//           statusMessage.textContent = message.failure; ////show message about mistake
+//         }
+//       });
+//   });
+// }
 
 
+//use JSON
+const forms = document.querySelectorAll('form');
 
+const message = { //add message option
+  loading: 'Progress',
+  success: 'Thank you! We will be in touch soon',
+  failure: 'Something went wrong...'
+}
 
+forms.forEach(item => { //add script for all form our form
+  postData(item); //it's function with 2 our form
+});
 
+function postData(form) {
+  form.addEventListener('submit', (e) => { 
+      e.preventDefault();
+
+      //this part for add message on the Page
+      const statusMessage = document.createElement('div'); //create div
+      statusMessage.classList.add('status'); //add class status  to div
+      statusMessage.textContent = message.loading; //put value
+      form.append(statusMessage); //add div with class status to form
+
+      const request = new XMLHttpRequest(); //create object XMLHttpRequest
+      request.open('POST', 'server.php'); //сollect settings that will help make a request; 'server.php' - the path we refer to
+
+      request.setRequestHeader('Content-type', 'application/json'); //for JSON we need to put Header: application/json
+      
+      const formData = new FormData(form); //in input you must always specify the attribute: name = "name (or another name)";
+
+      //object FormData we need to transform in JSON
+      //1) first create empty object, use forEach on formData
+      const object = {};
+      formData.forEach(function(value, key) {
+        object[key] = value;
+      });
+
+      //2) then we can use convertation in JSON
+      const json = JSON.stringify(object); //method stringify() to transform object in JSON
+ 
+      request.send(json); //sending a request JSON
+
+      request.addEventListener('load', () => { //request tracking
+        if (request.status === 200) { //if success
+          console.log(request.response);
+          statusMessage.textContent = message.success; //show message about success
+
+          form.reset();
+          setTimeout(() => {
+            statusMessage.remove(); //cleaning form
+          }, 2000);
+        } else {
+          statusMessage.textContent = message.failure; ////show message about mistake
+        }
+      });
+  });
+}
 
 
 
