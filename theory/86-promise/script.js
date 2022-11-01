@@ -1,46 +1,59 @@
 'use strict';
 
-// console.log('Запит даних');
-// const reg = new Promise((resolve, reject) => { //create Promice and Calback function
-//   //resolve - обіцянка виконалася правильно
-//   //reject - обіцянка не виконалася, щось пішло не так
-//   setTimeout(() => {
-//     console.log('Підготовка даних');
-  
-//     const product = {
-//       name: 'TV',
-//       price: 2000
-//     };
-  
-//     resolve(product);
-//   }, 2000);
-// }); 
+//Preserving order in asynchronous code: use Callback tree (1)
+// console.log('Request data');
 
-// reg.then((product) => { //метод then виконуєтьс на промісі у випадку позитивного результату(resolve); catch - у випадку негативного (reject)
+// setTimeout(() => {
+//   console.log('Data preparation');
+
+//   const product = {
+//     name: 'TV',
+//     price: 2000
+//   };
+
 //   setTimeout(() => {
 //     product.status = 'order';
 //     console.log(product);
 //   }, 2000);
-// });
+// }, 2000);
 
-//ok код для резолв
-// reg.then((product) => {
-//   return new Promise((resolve, reject) => {
-//     setTimeout(() => {
-//       product.status = 'order';
-//       resolve(product);
-//     }, 2000);
-//   });
-// }).then(data => { //асинхронний код, передача даних по ланцюжку
-//   data.modify = true;
-//   return data;
+//Preserving order in asynchronous code: use Promise (2)
+console.log('Request data');
+const reg = new Promise((resolve, reject) => { //create Promise; resolve = if the server responded, everything is ok; reject = the opposite;
+  setTimeout(() => {
+    console.log('Data preparation');
+  
+    const product = {
+      name: 'TV',
+      price: 2000
+    };
+  
+    //If the previous steps are completed, the next part of the code is executed
+    resolve(product);
+  }, 2000);
+}); 
 
-// }).then((data) => { 
-//   console.log(data);
-// });
-//ok код для резолв
+//the code for resolve
+reg.then((product) => { //method then = performed on the Promise in the case of a positive result(resolve); or method catch - in case of negative (reject)
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      product.status = 'order';
+      resolve(product);
+    }, 2000);
+  });
+}).then(data => { 
+  data.modify = true;
+  return data;
 
-//код для реджект
+}).then((data) => { 
+  console.log(data);
+}).catch(() => {
+  console.error('Mistake');
+}).finally(() => { //displays actions regardless of resolve/reject; for example: set the form cleaning
+  console.log('finally') 
+});
+
+//the code for reject
 // reg.then((product) => {
 //   return new Promise((resolve, reject) => {
 //     setTimeout(() => {
@@ -48,68 +61,32 @@
 //       reject();
 //     }, 2000);
 //   });
-// }).then(data => { //асинхронний код, передача даних по ланцюжку
+// }).then(data => { 
 //   data.modify = true;
 //   return data;
-
 // }).then((data) => { 
 //   console.log(data);
 // }).catch(() => {
-//   console.error('Помилка');
+//   console.error('Mistake');
 // });
 
-//код для файнелі = дія віжбудеться незалежно від ходу промісу, завжди відбудеться
-// reg.then((product) => {
-//   return new Promise((resolve, reject) => {
-//     setTimeout(() => {
-//       product.status = 'order';
-//       resolve(product);
-//     }, 2000);
-//   });
-// }).then(data => { //асинхронний код, передача даних по ланцюжку
-//   data.modify = true;
-//   return data;
-
-// }).then((data) => { 
-//   console.log(data);
-// }).catch(() => {
-//   console.error('Помилка');
-// }).finally(() => {
-//   console.log('finally') //у фінедді можна поставити очищення форми
-// });
-
-// setTimeout(() => { 
-//   console.log('Підготовка даних');
-
-//   const product = {
-//     name: 'TV',
-//     price: 2000
-//   };
-
-      //ця частина виконується тільки при позитивному ісході вище, якщо десь помилка, то вона не виконається
-      //цю част можна замінити функцією resolve
-//   setTimeout(() => {
-//     product.status = 'order';
-//     console.log(product);
-//   }, 2000);
-
-// }, 2000);
 
 
-//all/raise
+
+//+ 2 Method: all/raise
 const test  = time => {
   return new Promise(resolve => {
     setTimeout(() => resolve(), time); 
   });
 };
 
-// test(1000).then(() => console.log('1000ms'));
-// test(2000).then(() => console.log('2000ms'));
+// test(1000).then(() => console.log('get 1000ms'));
+// test(2000).then(() => console.log('get 2000ms'));
 
-Promise.all([test(1000), test(2000)]).then(() => {//all використ щоб переконатися, що проміс виконається. він чекає загрузки всіх промісів в масив, після чого зось виконує
+Promise.all([test(1000), test(2000)]).then(() => {//all = used to make sure that the promise will be fulfilled. it waits for all promises to be loaded into the array, after which it executes something
   console.log("All");
 });
 
-Promise.race([test(1000), test(2000)]).then(() => {//race виконує дії, коли перший проміс відпрацював
+Promise.race([test(1000), test(2000)]).then(() => {//race = executes when the first promise has run
   console.log("One");
 });
