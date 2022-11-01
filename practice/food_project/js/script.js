@@ -240,150 +240,179 @@ window.addEventListener('DOMContentLoaded', () => {
     //************************ 
     // Forms
     //************************* 
-    //Use formData
+    // //Use formData format
     // const forms = document.querySelectorAll('form');
-  
+
     // const message = { //add message option
-    //   loading: 'Progress',
+    //   loading: 'img/form/spinner.svg',
     //   success: 'Thank you! We will be in touch soon',
     //   failure: 'Something went wrong...'
     // }
-  
+
     // forms.forEach(item => { //add script for all form our form
     //   postData(item); //it's function with 2 our form
     // });
-  
+
     // function postData(form) {
     //   form.addEventListener('submit', (e) => { 
     //       e.preventDefault();
-  
+
     //       //this part for add message on the Page
-    //       const statusMessage = document.createElement('div'); //create div
-    //       statusMessage.classList.add('status'); //add class status  to div
-    //       statusMessage.textContent = message.loading; //put value
-    //       form.append(statusMessage); //add div with class status to form
-  
-    //       const request = new XMLHttpRequest(); //create object XMLHttpRequest
-    //       request.open('POST', 'server.php'); //сollect settings that will help make a request; 'server.php' - the path we refer to
-  
-    //       //!!for XMLHttpRequest + formData you don't need to write the title, otherwise it's an error
-    //       //request.setRequestHeader('Content-type', 'multipart/form-data'); 
+    //       const statusMessage = document.createElement('img'); //create div
+    //       statusMessage.src = message.loading; //src or set.Attribute
+    //       statusMessage.style.cssText =`
+    //         display: block;
+    //         margin: 0 auto;
+    //       `;
+    //       // form.append(statusMessage); //add div with class status to form
+    //       form.insertAdjacentElement('afterend', statusMessage);
+
+    //       // request.setRequestHeader('Content-type', 'application/json'); //for JSON we need to put Header: application/json
           
     //       const formData = new FormData(form); //in input you must always specify the attribute: name = "name (or another name)";
-  
-    //       request.send(formData); //sending a request formData
-  
-    //       request.addEventListener('load', () => { //request tracking
-    //         if (request.status === 200) { //if success
-    //           console.log(request.response);
-    //           statusMessage.textContent = message.success; //show message about success
-  
-    //           form.reset();
-    //           setTimeout(() => {
-    //             statusMessage.remove(); //cleaning form
-    //           }, 2000);
-    //         } else {
-    //           statusMessage.textContent = message.failure; ////show message about mistake
-    //         }
+
+    //       //object FormData we need to transform in JSON
+    //       //1) first create empty object, use forEach on formData
+    //       // const object = {};
+    //       // formData.forEach(function(value, key) {
+    //       //   object[key] = value;
+    //       // });
+
+    //       // //2) then we can use convertation in JSON
+    //       // const json = JSON.stringify(object); //method stringify() to transform object in JSON
+    
+    //       fetch('server.php', {
+    //         method: "POST",
+    //         // headers: {
+    //         //   'Content-type': 'application/json'
+    //         // },
+    //         body: formData
+    //       }).then(data => data.text())
+    //       .then(data => {
+    //         console.log(data);
+    //           showThankModal(message.success); //show message about success
+    //           statusMessage.remove(); //cleaning form
+    //       }).catch(() => {
+    //         showThankModal(message.failure); ////show message about mistake
+
+    //       }).finally(() => {
+    //         form.reset();
     //       });
     //   });
     // }
-  
-  
-    //use JSON
-    const forms = document.querySelectorAll('form');
-  
-    const message = { //add message option
-      loading: 'img/form/spinner.svg',
-      success: 'Thank you! We will be in touch soon',
-      failure: 'Something went wrong...'
-    }
-  
-    forms.forEach(item => { //add script for all form our form
-      postData(item); //it's function with 2 our form
-    });
-  
-    function postData(form) {
-      form.addEventListener('submit', (e) => { 
-          e.preventDefault();
-  
-          //this part for add message on the Page
-          const statusMessage = document.createElement('img'); //create div
-          statusMessage.src = message.loading; //src or set.Attribute
-          statusMessage.style.cssText =`
-            display: block;
-            margin: 0 auto;
-          `;
-          // form.append(statusMessage); //add div with class status to form
-          form.insertAdjacentElement('afterend', statusMessage);
-  
-          const request = new XMLHttpRequest(); //create object XMLHttpRequest
-          request.open('POST', 'server.php'); //сollect settings that will help make a request; 'server.php' - the path we refer to
-  
-          request.setRequestHeader('Content-type', 'application/json'); //for JSON we need to put Header: application/json
-          
-          const formData = new FormData(form); //in input you must always specify the attribute: name = "name (or another name)";
-  
-          //object FormData we need to transform in JSON
-          //1) first create empty object, use forEach on formData
-          const object = {};
-          formData.forEach(function(value, key) {
-            object[key] = value;
-          });
-  
-          //2) then we can use convertation in JSON
-          const json = JSON.stringify(object); //method stringify() to transform object in JSON
-    
-          request.send(json); //sending a request JSON
-  
-          request.addEventListener('load', () => { //request tracking
-            if (request.status === 200) { //if success
-              console.log(request.response);
-              showThankModal(message.success); //show message about success
-  
-              form.reset();
-              statusMessage.remove(); //cleaning form
-            } else {
-              showThankModal(message.failure); ////show message about mistake
-            }
-          });
-      });
-    }
-  
-    function showThankModal(message) {
-      const prevModalDialog = document.querySelector('.modal__dialog');
-  
-      prevModalDialog.classList.add('hide');
-      openModal();
-  
-      const thanksModal = document.createElement('div');
-      thanksModal.classList.add('modal__dialog');
-      thanksModal.innerHTML = `
-        <div class="modal__content">
-          <div class="modal__close" data-close></div>
-          <div class="modal__title">${message}</div>
-  
-        </div>  
-      `;
-  
-      document.querySelector('.modal').append(thanksModal);
-      setTimeout(() => {
-        thanksModal.remove();
-        prevModalDialog.classList.add('show');
-        prevModalDialog.classList.remove('hide');
-        closeModal();
-      }, 4000);
-    }
+
+    // function showThankModal(message) {
+    //   const prevModalDialog = document.querySelector('.modal__dialog');
+
+    //   prevModalDialog.classList.add('hide');
+    //   openModal();
+
+    //   const thanksModal = document.createElement('div');
+    //   thanksModal.classList.add('modal__dialog');
+    //   thanksModal.innerHTML = `
+    //     <div class="modal__content">
+    //       <div class="modal__close" data-close></div>
+    //       <div class="modal__title">${message}</div>
+
+    //     </div>  
+    //   `;
+
+    //   document.querySelector('.modal').append(thanksModal);
+    //   setTimeout(() => {
+    //     thanksModal.remove();
+    //     prevModalDialog.classList.add('show');
+    //     prevModalDialog.classList.remove('hide');
+    //     closeModal();
+    //   }, 4000);
+    // }
       
-    
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+  //Use JSON format
+  const forms = document.querySelectorAll('form');
+
+  const message = { //add message option
+    loading: 'img/form/spinner.svg',
+    success: 'Thank you! We will be in touch soon',
+    failure: 'Something went wrong...'
+  }
+
+  forms.forEach(item => { //add script for all form our form
+    postData(item); //it's function with 2 our form
   });
+
+  function postData(form) {
+    form.addEventListener('submit', (e) => { 
+        e.preventDefault();
+
+        //this part for add message on the Page
+        const statusMessage = document.createElement('img'); //create div
+        statusMessage.src = message.loading; //src or set.Attribute
+        statusMessage.style.cssText =`
+          display: block;
+          margin: 0 auto;
+        `;
+        // form.append(statusMessage); //add div with class status to form
+        form.insertAdjacentElement('afterend', statusMessage);
+
+        // request.setRequestHeader('Content-type', 'application/json'); //for JSON we need to put Header: application/json
+        
+        const formData = new FormData(form); //in input you must always specify the attribute: name = "name (or another name)";
+
+        //object FormData we need to transform in JSON
+        //1) first create empty object, use forEach on formData
+        const object = {};
+        formData.forEach(function(value, key) {
+          object[key] = value;
+        });
+
+        fetch('server.php', {
+          method: "POST",
+          headers: {
+            'Content-type': 'application/json'
+          },
+          //2) then we can use convertation in JSON
+          body: JSON.stringify(object) //method stringify() to transform object in JSON
+        })
+        .then(data => data.text())
+        .then(data => {
+          console.log(data);
+            showThankModal(message.success); //show message about success
+            statusMessage.remove(); //cleaning form
+        }).catch(() => {
+          showThankModal(message.failure); ////show message about mistake
+
+        }).finally(() => {
+          form.reset();
+        });
+    });
+  }
+
+  function showThankModal(message) {
+    const prevModalDialog = document.querySelector('.modal__dialog');
+
+    prevModalDialog.classList.add('hide');
+    openModal();
+
+    const thanksModal = document.createElement('div');
+    thanksModal.classList.add('modal__dialog');
+    thanksModal.innerHTML = `
+      <div class="modal__content">
+        <div class="modal__close" data-close></div>
+        <div class="modal__title">${message}</div>
+
+      </div>  
+    `;
+
+    document.querySelector('.modal').append(thanksModal);
+    setTimeout(() => {
+      thanksModal.remove();
+      prevModalDialog.classList.add('show');
+      prevModalDialog.classList.remove('hide');
+      closeModal();
+    }, 4000);
+  }
+    
+
+
+});
