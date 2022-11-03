@@ -338,10 +338,22 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   forms.forEach(item => { //add script for all form our form
-    postData(item); //it's function with 2 our form
+    bindPostData(item); //it's function with 2 our form
   });
 
-  function postData(form) {
+    const postData = async (url, data) => {
+      const res = await fetch(url, {
+        method: "POST",
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: data
+      });
+
+      return res.json();
+    };
+
+  function bindPostData(form) {
     form.addEventListener('submit', (e) => { 
         e.preventDefault();
 
