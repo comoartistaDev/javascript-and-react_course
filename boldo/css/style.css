@@ -116,6 +116,24 @@ img {
 /*  ====================  NAVBAR ==================== */
 header {
   background-color: var(--color-dark-blue);
+  position: relative;
+  overflow: hidden;
+}
+
+.header__container {
+  position: relative;
+}
+
+header:before {
+  content: '';
+  position: absolute;
+  width: 82rem;
+  height: 82rem;
+  top: -41rem;
+  right: -41rem;
+  border-radius: 50%;
+  background-color: #1C3D5B;
+  z-index: 0;
 }
 
 .nav__container {
@@ -125,6 +143,7 @@ header {
   align-items: center;
   margin: 0 auto;
   padding: 3.5rem 0 4rem;
+  z-index: 1;
 }
 
 .nav__menu {
@@ -150,7 +169,6 @@ header {
 }
 
 /*  ====================  NAVBAR ==================== */
-
 .header__main {
   display: flex;
   justify-content: space-between;
@@ -170,6 +188,7 @@ header {
 
 .header__right img {
   width: 30rem;
+  z-index: 100;
 }
 
 .header__bottom {
@@ -184,5 +203,3 @@ header {
 .swiper {
   padding: 6rem 0 6rem;
 }
-
- 
