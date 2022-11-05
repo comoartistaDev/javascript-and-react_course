@@ -52,6 +52,8 @@ h1 {
 }
 
 h2 {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 400;
   font-size: 3rem;
   line-height: 1.5;
 }
@@ -100,7 +102,8 @@ img {
 }
 
 .btn-white{
-  font-size: 1.5rem;
+  font-size: 1rem;
+  font-weight: 700;
   padding: .5rem 2.5rem;
 
   background: var(--color-white);
@@ -120,10 +123,6 @@ header {
   overflow: hidden;
 }
 
-.header__container {
-  position: relative;
-}
-
 header:before {
   content: '';
   position: absolute;
@@ -136,14 +135,17 @@ header:before {
   z-index: 0;
 }
 
+.header__container {
+  position: relative;
+}
+
+/*  ====================  NAVBAR ==================== */
 .nav__container {
   height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 auto;
   padding: 3.5rem 0 4rem;
-  z-index: 1;
 }
 
 .nav__menu {
@@ -153,22 +155,10 @@ header:before {
 }
 
 .nav__menu a {
-  font-weight: 500;
-  line-height: 1.75;
   transition: var(--transition);
 }
 
-.nav__menu a .btn {
-  display: inline-block;
-  background: var(--color-dark-blue);
-  color: var(--color-black);
-  padding: 1rem 2rem;
-  border: 1px solid transparent;
-  font-weight: 700;
-  transition: var(--transition);
-}
-
-/*  ====================  NAVBAR ==================== */
+/*  ====================  HEADER ==================== */
 .header__main {
   display: flex;
   justify-content: space-between;
@@ -188,11 +178,6 @@ header:before {
 
 .header__right img {
   width: 30rem;
-  z-index: 100;
-}
-
-.header__bottom {
-  overflow: hidden;
 }
 
 .swiper-slide {
@@ -202,4 +187,62 @@ header:before {
 
 .swiper {
   padding: 6rem 0 6rem;
+}
+
+/*  ====================  SECTION FEATURE ==================== */
+.feature__container p{
+  font-size: 1.2rem;
+  text-align: center;
+  color: var(--color-gray);
+  padding-bottom: .9rem;
+}
+
+.feature__container h2{
+  margin: 0 auto;
+  padding-bottom: 5rem;
+  max-width: 52rem;
+}
+
+.feature__cards {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.feature__card h4 {
+  padding: 1.5rem 0 .75rem;
+}
+
+.feature__card a {
+  font-size: 1.25rem;
+  padding-top: 1.75rem;
+  color: var(--color-black);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  position: relative;
+}
+
+
+.feature__card a::after {
+  position: absolute;
+  content: '';
+  height: 2px;
+  bottom: -8px; 
+  left: 0;
+  right: 0;
+  width: 34%;
+  background: var(--color-black);
+  transition:.5s;
+}
+
+.feature__card a:hover:after {
+  color: var(--color-green);
+}
+
+.feature__card a:hover {
+  color: var(--color-green);
+  
 }
