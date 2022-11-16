@@ -81,7 +81,7 @@ body {
   background-color: var(--line-border-fill);
   color: #fff;
   padding: 8px 30px;
-  border: 0;
+  border: 0; 
   border-radius: 6px;
   cursor: pointer;
   font-family: inherit;
