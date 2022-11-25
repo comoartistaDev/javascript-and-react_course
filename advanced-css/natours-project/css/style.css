@@ -536,9 +536,6 @@ body {
     transform: translate(-50%, -50%);
     text-align: center; }
 
-.navigation__checkbox {
-  display: none; }
-
 .navigation__button {
   background-color: #fff;
   height: 7rem;
