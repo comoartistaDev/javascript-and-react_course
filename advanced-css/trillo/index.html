@@ -5,12 +5,42 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
+        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">        <link rel="stylesheet" href="css/icon-font.css">
         <link rel="stylesheet" href="css/style.css">
         <link rel="shortcut icon" type="image/png" href="img/favicon.png">
         
         <title>trillo &mdash; Your all-in-one booking app</title>
     </head>
     <body>
-        Trillo
+        <div class="container">
+            <header class="header">
+                <img class="header__logo" src="/img/logo.png" alt="logo">
+                <form action="#" class="search">
+                    <input type="text" class="search__input" placeholder="Search hotels" id="name" required>
+                    <button class="search__btn"><i class="uil uil-search search__btn"></i></button>
+                </form>
+
+                <nav class="user-nav">
+                    <div class="user-nav__notification">
+                        <div class="user-nav__icon-box">
+                            <i class="uil uil-bookmark-full"></i>
+                            <span class="user-nav__notification">7</span>
+                        </div>
+                        <div class="user-nav__icon-box">
+                            <i class="uil uil-envelope"></i>
+                            <span class="user-nav__notification">7</span>
+                        </div>
+                    </div>
+                    <div class="user-nav__user">
+                        <img class="user-nav__user-photo"src="img/user.jpg" alt="user pic">
+                        <span class="user-nav__user-name">Jonas</span>
+                    </div> 
+                </nav>
+            </header>
+            <div class="content">
+                <nav class="sidebar">Navigation</nav>
+                <main class="hotel-view">View</main>
+            </div>
+        </div>
     </body>
 </html> 
