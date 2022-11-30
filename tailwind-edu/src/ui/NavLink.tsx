@@ -4,8 +4,8 @@ interface Props {
 }
 
 export function NavLink({ icon: Icon, label }: Props) {
-  return <button className="bg-red-500 space-x-3 flex items-center text-left rounded-full py-3 px-6 font-bold text-lg">
-    <Icon className="h-6 w-6"/>
-    <span>{label}</span>
+  return <button className="space-x-3 flex items-center text-left rounded-full py-3 px-6 font-bold text-xl transition hover:bg-blue-500 hover:bg-opacity-10 hover:text-blue-400">
+    <Icon className="h-6 w-6 m-1"/>
+    <span className="hidden md:block">{label}</span>
   </button>
 }
