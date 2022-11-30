@@ -3,10 +3,10 @@ import {
   BellIcon, 
   ChatBubbleLeftEllipsisIcon,
   HashtagIcon,
-  MagnifyingGlassIcon
 } from '@heroicons/react/24/outline';
 import { Card } from '~/ui/Card';
 import { NavLink } from '~/ui/NavLink';
+import { SearchInput } from '~/ui/SearchInput';
 
 // import styles from '../styles/Home.module.css'
 
@@ -32,14 +32,10 @@ export default function Home() {
         </div>
       </div>
       <div className='flex-1'>
+        <div className='text-xl font-bold sticky top-0 p-4 bg-gray-900 border-b border-gray-800'>Home</div>
           <Tweets />
       </div>
-      <div className='hidden md:block w-1/4 sticky top-0 h-full py-2 px-4'>
-        <div className='rounded-full bg-gray-800 w-full flex items-center border border-transparent transition focus-within:border-blue-500'>
-          <MagnifyingGlassIcon className='w-6 h-6 ml-4 text-gray-500'/>
-          <input className='bg-transparent w-full focus:outline-none px-4 py-2' placeholder='Search Twitter' />
-          </div>
-      </div>
+          <SearchInput />
     </div>
   )
 }

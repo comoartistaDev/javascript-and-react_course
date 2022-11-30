@@ -1,4 +1,4 @@
-import { ArrowPathRoundedSquareIcon, ArrowUpTrayIcon, ArrowUturnLeftIcon, ChatBubbleOvalLeftIcon, EllipsisHorizontalIcon, HeartIcon } from "@heroicons/react/24/outline";
+import { ArrowPathRoundedSquareIcon, ArrowUpTrayIcon, ChatBubbleOvalLeftIcon, EllipsisHorizontalIcon, HeartIcon } from "@heroicons/react/24/outline";
 import { TweetAction } from "./TweetAction";
 
 interface Props {
