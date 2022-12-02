@@ -2,34 +2,44 @@
 
 
 $color-violet--light: #BB6BD9;
-$color-violet: #231D4F;
+$color-violet: #0f0b30;
 $color-gray: #848199;
 
 
-body {
+* {
   padding: 0;
-  // margin: 0 auto;
+  margin: 0;
+  box-sizing: border-box;
+}
 
-  height: min-content;
+body {
   background-image: url("../img/bg.jpg");
   background-size: cover;
   font-family: 'Poppins', sans-serif;
   font-size: 15px;
   font-weight: 400;
   color: $color-gray;
+  height: 100vh;
+  @media (max-width: 910px) {
+    height: auto;
+  }
 }
 
 .container {
-  width: 1040px;
+  max-width: 1040px;
   margin: 0 auto;
-
+  padding: 0 10px;
 }
 
 h1 {
+  text-align: left;
   color: $color-violet;
   font-size: 40px;
   line-height: 60px;
   font-weight: 300;
+  @media (max-width: 910px)  {
+    text-align: center;
+  }
 }
 
 .box {
@@ -39,9 +49,19 @@ h1 {
   align-items: center;
   column-gap: 122px; 
 
+  @media (max-width: 910px) {
+    margin-top: 10px;
+    flex-direction: column;
+  }
+
   &__text {
     font-size: 18px;
     line-height: 27px;
+
+    @media (max-width: 910px) {
+      text-align: center;
+      margin-bottom: 15px;
+    }
   }
 }
 
@@ -50,11 +70,25 @@ h1 {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   column-gap: 34px;
-  background-color: rgba($color: #ffffff, $alpha: .35);
+  background-color: rgba(255, 255, 255, 0.35);;
   border-radius: 26px;
   padding: 40px 68px;
   position: relative;
 
+  @media (max-width: 976px) {
+    column-gap: 7px;
+  }
+
+  @media (max-width: 910px) {
+    grid-template-columns: 1fr;
+    margin-top: 30px;
+  }
+}
+
+.card:not(:nth-child(3)) {
+  @media (max-width: 910px) {
+    margin-bottom: 50px;
+  }
 }
 
 .card {
@@ -65,7 +99,9 @@ h1 {
   &__content {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
   }
+
   &--most-popular {
     position: absolute;
     bottom: 20px;
@@ -74,7 +110,18 @@ h1 {
     color: #fff;
     padding: 20px 30px;
     border-radius: 26px;
-    width: 240px;
+    width: 28%;
+
+    @media (max-width: 976px) {
+      width: 30%;
+    }
+  
+    @media (max-width: 910px) {
+      position: relative;
+      width: 100%;
+      bottom: 0;
+      right: 0;  
+    }
   }
 
   &__label--most-popular {
@@ -111,27 +158,30 @@ h1 {
       color: #fff;
     }
   }
+
   &__title {
     margin: 20px 0px 6px;
     color: $color-violet;
     font-size: 28px;
     line-height: 42px;
     font-weight: 500; 
+
     &--most-popular {
       color: #fff;
-     
     }
   }
 
   &__descr {
     line-height: 22.5px;
   }
+
   &__list {
     list-style: none;
     padding: 0;
   }
 
   &__btn {
+    margin-top: 23px;
     padding: 11px 56px;
     line-height: 22.5px;
     background-color: $color-gray;
@@ -140,17 +190,121 @@ h1 {
     text-decoration: none;
     display: inline-block;
     text-align: center;
+    transition: all .3s ease;
 
     &--most-popular {
       background-color: $color-violet--light;
-
+      transition: all .3s ease;
     }
+  }
+
+  &__btn:hover {
+    background-color: $color-violet--light;
   }
 }
 
-.uis-check-circle {
-  font-size: 20px;
-  color: rgba(82, 67,194, .15);
-  margin-right: 10px;
+.card__violet:hover {
+  background-color: #403879;
 }
 
+.uil-check {
+  font-size: 20px;
+  color: $color-violet--light;
+  margin-right: 10px; 
+  position: relative; 
+}
+
+.uil-check::after {
+  content: '';
+  background-color: rgba(82, 67, 194, .15);
+  border-radius: 100%;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.icon--most-popular {
+  color: #fff;
+}
+
+.switch-wrapper {
+  position: relative;
+  display: inline-flex;
+  padding: 12px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.55);
+}
+ 
+.switch-wrapper [type="radio"] {
+  position: absolute;
+  left: -9999px;
+}
+ 
+.switch-wrapper [type="radio"]:checked#monthly ~ label[for="monthly"],
+.switch-wrapper [type="radio"]:checked#yearly ~ label[for="yearly"] {
+  color: #fff;
+}
+ 
+.switch-wrapper [type="radio"]:checked#monthly ~ label[for="monthly"]:hover,
+.switch-wrapper [type="radio"]:checked#yearly ~ label[for="yearly"]:hover {
+  background: transparent;
+}
+
+.switch-wrapper
+  [type="radio"]:checked#monthly
+  + label[for="yearly"]
+  ~ .highlighter {
+  transform: none;
+}
+ 
+.switch-wrapper
+  [type="radio"]:checked#yearly
+  + label[for="monthly"]
+  ~ .highlighter {
+  transform: translateX(100%);
+}
+ 
+.switch-wrapper label {
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.83px;
+  z-index: 1;
+  min-width: 100px;
+  line-height: 32px;
+  cursor: pointer;
+  border-radius: 30px;
+}
+ 
+.switch-wrapper label:hover {
+  background: rgba(82, 67, 194, .15);
+}
+ 
+.switch-wrapper .highlighter {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  height: calc(100% - 8px);
+  border-radius: 30px;
+  background: #BB6BD9;
+  transition: transform 0.25s ease-in-out;
+}
+
+
+
+.hide {
+  display: none;
+}
+
+
+.card .card--most-popular {
+
+  @media (max-width: 910px) {
+    display: none;
+
+  }
+}

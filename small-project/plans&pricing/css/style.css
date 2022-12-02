@@ -1,24 +1,41 @@
-body {
+* {
   padding: 0;
-  height: min-content;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
   background-image: url("../img/bg.jpg");
   background-size: cover;
   font-family: "Poppins", sans-serif;
   font-size: 15px;
   font-weight: 400;
   color: #848199;
+  height: 100vh;
+}
+@media (max-width: 910px) {
+  body {
+    height: auto;
+  }
 }
 
 .container {
-  width: 1040px;
+  max-width: 1040px;
   margin: 0 auto;
+  padding: 0 10px;
 }
 
 h1 {
-  color: #231D4F;
+  text-align: left;
+  color: #0f0b30;
   font-size: 40px;
   line-height: 60px;
   font-weight: 300;
+}
+@media (max-width: 910px) {
+  h1 {
+    text-align: center;
+  }
 }
 
 .box {
@@ -28,9 +45,21 @@ h1 {
   align-items: center;
   column-gap: 122px;
 }
+@media (max-width: 910px) {
+  .box {
+    margin-top: 10px;
+    flex-direction: column;
+  }
+}
 .box__text {
   font-size: 18px;
   line-height: 27px;
+}
+@media (max-width: 910px) {
+  .box__text {
+    text-align: center;
+    margin-bottom: 15px;
+  }
 }
 
 .cards {
@@ -43,6 +72,23 @@ h1 {
   padding: 40px 68px;
   position: relative;
 }
+@media (max-width: 976px) {
+  .cards {
+    column-gap: 7px;
+  }
+}
+@media (max-width: 910px) {
+  .cards {
+    grid-template-columns: 1fr;
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 910px) {
+  .card:not(:nth-child(3)) {
+    margin-bottom: 50px;
+  }
+}
 
 .card {
   display: flex;
@@ -52,16 +98,30 @@ h1 {
 .card__content {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 .card--most-popular {
   position: absolute;
   bottom: 20px;
   right: 45px;
-  background-color: #231D4F;
+  background-color: #0f0b30;
   color: #fff;
   padding: 20px 30px;
   border-radius: 26px;
-  width: 240px;
+  width: 28%;
+}
+@media (max-width: 976px) {
+  .card--most-popular {
+    width: 30%;
+  }
+}
+@media (max-width: 910px) {
+  .card--most-popular {
+    position: relative;
+    width: 100%;
+    bottom: 0;
+    right: 0;
+  }
 }
 .card__label--most-popular {
   background-color: #403879;
@@ -77,7 +137,7 @@ h1 {
   right: 30px;
 }
 .card__price {
-  color: #231D4F;
+  color: #0f0b30;
   font-size: 36px;
   font-weight: 600;
 }
@@ -95,7 +155,7 @@ h1 {
 }
 .card__title {
   margin: 20px 0px 6px;
-  color: #231D4F;
+  color: #0f0b30;
   font-size: 28px;
   line-height: 42px;
   font-weight: 500;
@@ -111,6 +171,7 @@ h1 {
   padding: 0;
 }
 .card__btn {
+  margin-top: 23px;
   padding: 11px 56px;
   line-height: 22.5px;
   background-color: #848199;
@@ -119,15 +180,109 @@ h1 {
   text-decoration: none;
   display: inline-block;
   text-align: center;
+  transition: all 0.3s ease;
 }
 .card__btn--most-popular {
   background-color: #BB6BD9;
+  transition: all 0.3s ease;
+}
+.card__btn:hover {
+  background-color: #BB6BD9;
 }
 
-.uis-check-circle {
+.card__violet:hover {
+  background-color: #403879;
+}
+
+.uil-check {
   font-size: 20px;
-  color: rgba(82, 67, 194, 0.15);
+  color: #BB6BD9;
   margin-right: 10px;
+  position: relative;
+}
+
+.uil-check::after {
+  content: "";
+  background-color: rgba(82, 67, 194, 0.15);
+  border-radius: 100%;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.icon--most-popular {
+  color: #fff;
+}
+
+.switch-wrapper {
+  position: relative;
+  display: inline-flex;
+  padding: 12px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.switch-wrapper [type=radio] {
+  position: absolute;
+  left: -9999px;
+}
+
+.switch-wrapper [type=radio]:checked#monthly ~ label[for=monthly],
+.switch-wrapper [type=radio]:checked#yearly ~ label[for=yearly] {
+  color: #fff;
+}
+
+.switch-wrapper [type=radio]:checked#monthly ~ label[for=monthly]:hover,
+.switch-wrapper [type=radio]:checked#yearly ~ label[for=yearly]:hover {
+  background: transparent;
+}
+
+.switch-wrapper [type=radio]:checked#monthly + label[for=yearly] ~ .highlighter {
+  transform: none;
+}
+
+.switch-wrapper [type=radio]:checked#yearly + label[for=monthly] ~ .highlighter {
+  transform: translateX(100%);
+}
+
+.switch-wrapper label {
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.83px;
+  z-index: 1;
+  min-width: 100px;
+  line-height: 32px;
+  cursor: pointer;
+  border-radius: 30px;
+}
+
+.switch-wrapper label:hover {
+  background: rgba(82, 67, 194, 0.15);
+}
+
+.switch-wrapper .highlighter {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  height: calc(100% - 8px);
+  border-radius: 30px;
+  background: #BB6BD9;
+  transition: transform 0.25s ease-in-out;
+}
+
+.hide {
+  display: none;
+}
+
+@media (max-width: 910px) {
+  .card .card--most-popular {
+    display: none;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
