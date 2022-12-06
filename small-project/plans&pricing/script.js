@@ -4,11 +4,12 @@ const prices = tableWrapper.querySelectorAll(".price");
 const toggleClass = "hide";
 
 console.log('hi');
-
 for (const switchInput of switchInputs) {
   switchInput.addEventListener("input", function () {
     for (const price of prices) {
       price.classList.add(toggleClass);
+      price.style.transition = 'all .5s easy';
+
     }
     const activePrices = tableWrapper.querySelectorAll(
       `.price.${switchInput.id}`
