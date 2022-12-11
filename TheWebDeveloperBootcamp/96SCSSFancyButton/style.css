@@ -1,0 +1,33 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #0b081a;
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 10px;
+}
+
+button {
+  position: absolute;
+  padding: 1rem 2rem;
+  border: 2px solid #b4653e;
+  background: transparent;
+  color: #b4653e;
+  font-size: 1.8rem;
+  font-weight: 300;
+  transition: all .4s ease;
+}
+
+button:hover {
+  cursor: pointer;
+  transform: translateY(-10px);
+  color: #fff;
+  border: .2rem solid #cfff6f;
+  box-shadow: 0px .2rem .3rem #cfff6f;
+}
+
