@@ -1,0 +1,25 @@
+li {
+  background-color: #B10DC9;
+}
+
+.highlight {
+  background-color: #7FDBFF;
+}
+
+
+.button {
+  background-color: #1d5ee0;
+  color: #ffffff;
+  font-size: 20px;
+  border: none;
+  border-radius: 6px;
+  margin: 6px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: 'background-color, color' 5s ease-in;
+}
+
+.button:hover {
+  background-color: #ffffff;
+  color: #1d5ee0;
+} 
