@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-neutral-900 ">
+  <section class="flex-col flex h-screen justify-center items-center px-2 py-2 max-w-xl mx-auto text-neutral-600">
+    <div class="rounded-md bg-white w-full">
+        <img class="h-80 w-full object-cover rounded-tl-md rounded-tr-md" src="https://images.unsplash.com/photo-1560012057-4372e14c5085?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1548&q=80" alt="img">
+        <h1 class="p-4 text-lg font-semibold">Ping Pong Score Keeper</h1>
+    </div>
+
+    <div class="mt-1 bg-white rounded-md w-full">
+        <div class="px-6 py-6">
+            <p class="text-6xl font-medium"><span id="p1Display">0</span> to <span id="p2Display">0</span</p>
+            <p class="pt-2 text-xl">Use the buttons below to keep score</p>
+        </div>
+        <div class="px-6 pb-6">
+          <label class="text-3xl font-semibold" for="playto">Playing To</label>
+          <select class="text-xl ml-2 px-6 py-4 border-2 rounded-full border-neutral-200" name="number" id="playToSelect">
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+          </select>
+        </div>
+        <div class="px-1 pb-1 grid gap-1 grid-cols-1 md:grid-cols-3">
+            <button class="px-2 py-4 text-2xl bg-yellow-500	text-white rounded-md hover:bg-yellow-600" id="pl1Button">+1Player One</button>
+            <button class="px-2 py-4 text-2xl text-2xl bg-sky-600 text-white rounded-md hover:bg-sky-700" id="pl2Button">+1Player Two</button>
+            <button class="px-2 py-4 text-2xl text-2xl bg-rose-400 text-white rounded-md hover:bg-rose-500" id="resetButton">Reset</button>
+        </div>
+    </div>
+  </section>
+  <script src="app.js"></script>
+</body>
+</html>
